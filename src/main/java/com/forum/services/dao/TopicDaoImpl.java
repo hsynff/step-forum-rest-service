@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 public class TopicDaoImpl implements TopicDao {
-    private final String GET_ALL_TOPIC_SQL = "select t.id_topic, t.title, t.description, t.share_date, t.view_count, t.status, u.id_user, u.email, u.first_name, u.last_name, u.img, c.id_comment, c.description, c.write_date from topic t inner join user u on t.id_user = u.id_user left join comment c on c.id_topic = t.id_topic where t.status = ? order by t.share_date desc";
+    private final String GET_ALL_TOPIC_SQL = "selectT t.id_topic, t.title, t.description, t.share_date, t.view_count, t.status, u.id_user, u.email, u.first_name, u.last_name, u.img, c.id_comment, c.description, c.write_date from topic t inner join user u on t.id_user = u.id_user left join comment c on c.id_topic = t.id_topic where t.status = ? order by t.share_date desc";
     private final String GET_TOPIC_BY_ID_SQL = "select t.id_topic, t.title, t.description as t_description, t.share_date, t.view_count, t.status, u.id_user as t_id_user, u.first_name as t_first_name, u.img as t_img, u.last_name as t_last_name  from topic t inner join user u on t.id_user=u.id_user where t.id_topic=? and t.status = ? ";
     private final String GET_POPULAR_TOPICS_SQL = "select t.id_topic, t.title, count(c.id_comment) as comments from topic t left join comment c on t.id_topic=c.id_topic where t.status = ? group by t.title having comments>0  order by comments desc limit 7";
     private final String ADD_TOPIC_SQL = "insert into topic(title, description, share_date, view_count, id_user, status) values(?, ?, ?, ?, ?, ?)";
